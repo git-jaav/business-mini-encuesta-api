@@ -35,8 +35,7 @@ public class EncuestaTemaController {
 
 
     @GetMapping(value = "/id/{id}" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "get all data demo" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -60,8 +59,7 @@ public class EncuestaTemaController {
 
 
     @GetMapping(value = "/" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "get all data demo" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,

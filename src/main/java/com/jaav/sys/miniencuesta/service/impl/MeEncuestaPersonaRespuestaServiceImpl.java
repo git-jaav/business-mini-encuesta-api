@@ -4,10 +4,14 @@ import com.jaav.sys.miniencuesta.model.api.MeEncuestaPersonaRespuestaJson;
 import com.jaav.sys.miniencuesta.model.entities.MeEncuestaPersonaRespuesta;
 import com.jaav.sys.miniencuesta.repository.MeEncuestaPersonaRespuestaRepository;
 import com.jaav.sys.miniencuesta.service.MeEncuestaPersonaRespuestaService;
+import com.jaav.sys.miniencuesta.utils.Constant;
 import com.jaav.sys.miniencuesta.utils.JsonViewAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +62,15 @@ public class MeEncuestaPersonaRespuestaServiceImpl implements MeEncuestaPersonaR
 
     @Override
     public Optional<MeEncuestaPersonaRespuestaJson> save(MeEncuestaPersonaRespuestaJson objDao){
+        if (!Optional.ofNullable(objDao.getEnperEstado()).isPresent()) {
+            objDao.setEnperEstado(Constant.ACTIVO_db);
+        }
+        objDao.setEnperFechaRegistro(Date.from(LocalDateTime.now()
+                .toInstant(ZoneOffset.UTC)));
+        objDao.setEnperNombrecompleto(
+                new StringBuilder().append(objDao.getEnperApellidoNombres())
+                        .append(", ").append(objDao.getEnperApellidoPaterno())
+                        .append(" ").append(objDao.getEnperApellidoMaterno()).toString());
         return Optional.ofNullable(encuestaPersonaRespuestaRepository.save(
                 jsonAssembInverso.getJsonObject(objDao)))
                 .map(e -> jsonAssemb.getJsonObject(e));
@@ -65,6 +78,13 @@ public class MeEncuestaPersonaRespuestaServiceImpl implements MeEncuestaPersonaR
 
     @Override
     public Optional<MeEncuestaPersonaRespuestaJson> update(MeEncuestaPersonaRespuestaJson objDao) {
+        if (!Optional.ofNullable(objDao.getEnperEstado()).isPresent()) {
+            objDao.setEnperEstado(Constant.ACTIVO_db);
+        }
+        objDao.setEnperNombrecompleto(
+                new StringBuilder().append(objDao.getEnperApellidoNombres())
+                .append(", ").append(objDao.getEnperApellidoPaterno())
+                .append(" ").append(objDao.getEnperApellidoMaterno()).toString());
         return Optional.ofNullable(encuestaPersonaRespuestaRepository.save(
                 jsonAssembInverso.getJsonObject(objDao)))
                 .map(e -> jsonAssemb.getJsonObject(e));

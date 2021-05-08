@@ -33,8 +33,7 @@ public class EncuestaPersonaRespuestaController {
 
 
     @GetMapping(value = "/id/{id}" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "obtener por id" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -58,8 +57,7 @@ public class EncuestaPersonaRespuestaController {
 
 
     @GetMapping(value = "/" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE )
     @ApiOperation(value = "listar" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -81,8 +79,7 @@ public class EncuestaPersonaRespuestaController {
     }
 
     @GetMapping(value = "/tema/{enteCodigo}" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE )
     @ApiOperation(value = "listar por tema" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -105,8 +102,7 @@ public class EncuestaPersonaRespuestaController {
     }
 
     @GetMapping(value = "/pag/{iniPag}/{sizePag}/tema/{enteCodigo}" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE )
     @ApiOperation(value = "listr por tema y paginado" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -145,8 +141,7 @@ public class EncuestaPersonaRespuestaController {
 
 
     @GetMapping(value = "/usuario/{codUsuario}/tema/{enteCodigo}" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "listar por usuario y por tema" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -172,8 +167,7 @@ public class EncuestaPersonaRespuestaController {
     }
 
     @PostMapping(value = "/" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "guardar" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -198,8 +192,7 @@ public class EncuestaPersonaRespuestaController {
 
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE )
     @ApiOperation(value = "actualizar" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -224,8 +217,7 @@ public class EncuestaPersonaRespuestaController {
 
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "eliminar" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,

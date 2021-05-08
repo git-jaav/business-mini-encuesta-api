@@ -2,7 +2,7 @@
 ###################################################
 swagger:
   info:
-    title: Mini Encuesta
+    title: Mini Encuesta API Business
     description: Api de prueba basada en Spring boot
     version: 1.0.0
     contact:
@@ -20,7 +20,7 @@ spring:
 spring:
   profiles: prod
   application:
-    name: myapp_demo
+    name: miniencuesta-business
 
   jpa:
     properties:
@@ -67,7 +67,7 @@ server:
 spring:
   profiles: dev
   application:
-    name: myapp_demo
+    name: miniencuesta-business
 
   jpa:
     properties:

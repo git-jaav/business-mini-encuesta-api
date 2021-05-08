@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface MeEncuestaPersonaRespuestaRepository extends CrudRepository<MeEncuestaPersonaRespuesta, Long>  {
 
-    @Query(value = "SELECT * FROM MeEncuestaPersonaRespuesta enResp " +
-            "WHERE enResp.meEncuestaAlternativa.enteCodigo =?1 ", nativeQuery = true)
+    @Query(value = "select enResp from MeEncuestaPersonaRespuesta enResp " +
+            "where enResp.meEncuestaAlternativa.enteCodigo =?1 ", nativeQuery = false)
     List<MeEncuestaPersonaRespuesta> findByEnteCodigo(String enteCodigo);
 
 
-    @Query(value = "SELECT * FROM MeEncuestaPersonaRespuesta enResp " +
-            "WHERE enResp.meEncuestaAlternativa.enteCodigo =?1 and  enResp.enperCodigoUsuario =?2",
-            nativeQuery = true)
+    @Query(value = "select enResp from MeEncuestaPersonaRespuesta enResp " +
+            "where enResp.meEncuestaAlternativa.enteCodigo =?1 and  enResp.enperCodigoUsuario =?2",
+            nativeQuery = false)
     List<MeEncuestaPersonaRespuesta> findByEnteCodigoAndUser(String enteCodigo, String usuario);
 
 }

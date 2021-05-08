@@ -30,8 +30,7 @@ public class EncuestaAlternativaController {
 
 
     @GetMapping(value = "/tema/{enteCodigo}" ,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE )
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "listar las alternativas" ,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,

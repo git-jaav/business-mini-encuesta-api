@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Spring Boot REST API - MYAPP-DEMO",
-    "version": "1.0",
-    "title": "SPRING BOOT - MYAPP-DEMO",
+    "description": "Api de prueba basada en Spring boot",
+    "version": "1.0.0",
+    "title": "Mini Encuesta API Business",
     "termsOfService": "Terminos del servicio",
     "contact": {
       "name": "José Alfonso Arauco Villar - JAAV",
-      "url": "http://localhost:8081",
+      "url": "localhost:8080",
       "email": "araucovillar@gmail.com"
     },
     "license": {
@@ -15,26 +15,30 @@
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
     }
   },
-  "host": "localhost:8081",
+  "host": "localhost:8088",
   "basePath": "/",
   "tags": [
     {
-      "name": "status-controller",
-      "description": "Status Controller"
+      "name": "encuesta-tema-controller",
+      "description": "Encuesta Tema Controller"
     },
     {
-      "name": "procces-controller",
-      "description": "Procces Controller"
+      "name": "encuesta-persona-respuesta-controller",
+      "description": "Encuesta Persona Respuesta Controller"
+    },
+    {
+      "name": "encuesta-alternativa-controller",
+      "description": "Encuesta Alternativa Controller"
     }
   ],
   "paths": {
-    "/api/channel/sys/v1/procces/execute": {
-      "post": {
+    "/api/business/miniencuesta/v1/alternativa/tema/{enteCodigo}": {
+      "get": {
         "tags": [
-          "procces-controller"
+          "encuesta-alternativa-controller"
         ],
-        "summary": "Ejecutar proceso X",
-        "operationId": "executeUsingPOST",
+        "summary": "listar las alternativas",
+        "operationId": "listarTemaCodigoUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -43,10 +47,10 @@
         ],
         "parameters": [
           {
-            "name": "type",
-            "in": "query",
-            "description": "type",
-            "required": false,
+            "name": "enteCodigo",
+            "in": "path",
+            "description": "enteCodigo",
+            "required": true,
             "type": "string"
           }
         ],
@@ -56,8 +60,146 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ProccesEntity"
+                "$ref": "#/definitions/MeEncuestaAlternativaJson"
               }
+            }
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/business/miniencuesta/v1/respuesta/": {
+      "get": {
+        "tags": [
+          "encuesta-persona-respuesta-controller"
+        ],
+        "summary": "listar",
+        "operationId": "obtenerTodosUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
+              }
+            }
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "encuesta-persona-respuesta-controller"
+        ],
+        "summary": "guardar",
+        "operationId": "guardarUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "objJson",
+            "description": "objJson",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "encuesta-persona-respuesta-controller"
+        ],
+        "summary": "actualizar",
+        "operationId": "actualizarUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "objJson",
+            "description": "objJson",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
             }
           },
           "201": {
@@ -81,24 +223,34 @@
         }
       }
     },
-    "/api/status/time": {
+    "/api/business/miniencuesta/v1/respuesta/id/{id}": {
       "get": {
         "tags": [
-          "status-controller"
+          "encuesta-persona-respuesta-controller"
         ],
-        "summary": "Verificar time",
-        "operationId": "getTimeUsingGET",
+        "summary": "obtener por id",
+        "operationId": "obtenerPorIdUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
         "responses": {
           "200": {
             "description": "ok",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
             }
           },
           "400": {
@@ -119,13 +271,234 @@
         }
       }
     },
-    "/api/status/verify": {
+    "/api/business/miniencuesta/v1/respuesta/pag/{iniPag}/{sizePag}/tema/{enteCodigo}": {
       "get": {
         "tags": [
-          "status-controller"
+          "encuesta-persona-respuesta-controller"
         ],
-        "summary": "Verificar estado API",
-        "operationId": "verificarStatusUsingGET",
+        "summary": "listr por tema y paginado",
+        "operationId": "listarTemaCodigoUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enteCodigo",
+            "in": "path",
+            "description": "enteCodigo",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iniPag",
+            "in": "path",
+            "description": "iniPag",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sizePag",
+            "in": "path",
+            "description": "sizePag",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
+              }
+            }
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/business/miniencuesta/v1/respuesta/tema/{enteCodigo}": {
+      "get": {
+        "tags": [
+          "encuesta-persona-respuesta-controller"
+        ],
+        "summary": "listar por tema",
+        "operationId": "listarTemaCodigoUsingGET_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enteCodigo",
+            "in": "path",
+            "description": "enteCodigo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
+              }
+            }
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/business/miniencuesta/v1/respuesta/usuario/{codUsuario}/tema/{enteCodigo}": {
+      "get": {
+        "tags": [
+          "encuesta-persona-respuesta-controller"
+        ],
+        "summary": "listar por usuario y por tema",
+        "operationId": "obtenerPorCodigoUsuarioUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "codUsuario",
+            "in": "path",
+            "description": "codUsuario",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "enteCodigo",
+            "in": "path",
+            "description": "enteCodigo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MeEncuestaPersonaRespuestaJson"
+              }
+            }
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/business/miniencuesta/v1/respuesta/{id}": {
+      "get": {
+        "tags": [
+          "encuesta-persona-respuesta-controller"
+        ],
+        "summary": "eliminar",
+        "operationId": "eliminarUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/business/miniencuesta/v1/tema/": {
+      "get": {
+        "tags": [
+          "encuesta-tema-controller"
+        ],
+        "summary": "get all data demo",
+        "operationId": "obtenerTodosUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -136,7 +509,57 @@
           "200": {
             "description": "ok",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MeEncuestaTemaJson"
+              }
+            }
+          },
+          "400": {
+            "description": "BAD RQ",
+            "schema": {
+              "$ref": "#/definitions/Exception"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/business/miniencuesta/v1/tema/id/{id}": {
+      "get": {
+        "tags": [
+          "encuesta-tema-controller"
+        ],
+        "summary": "get all data demo",
+        "operationId": "obtenerPorIdUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/MeEncuestaTemaJson"
             }
           },
           "400": {
@@ -185,21 +608,88 @@
         }
       }
     },
-    "ProccesEntity": {
+    "MeEncuestaAlternativaJson": {
       "type": "object",
       "properties": {
-        "countError": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "countOk": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "proccesName": {
+        "enaltEstado": {
           "type": "string"
         },
-        "status": {
+        "enaltId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enaltOpcion": {
+          "type": "string"
+        },
+        "enteCodigo": {
+          "type": "string"
+        }
+      }
+    },
+    "MeEncuestaPersonaRespuestaJson": {
+      "type": "object",
+      "properties": {
+        "enaltId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enperApellidoMaterno": {
+          "type": "string"
+        },
+        "enperApellidoNombres": {
+          "type": "string"
+        },
+        "enperApellidoPaterno": {
+          "type": "string"
+        },
+        "enperCodigoUsuario": {
+          "type": "string"
+        },
+        "enperEdad": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enperEmail": {
+          "type": "string"
+        },
+        "enperEncuestaPersonaId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enperEstado": {
+          "type": "string"
+        },
+        "enperFechaRegistro": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "enperLugarTrabajo": {
+          "type": "string"
+        },
+        "enperNombrecompleto": {
+          "type": "string"
+        },
+        "enperProfesion": {
+          "type": "string"
+        },
+        "enperSexo": {
+          "type": "string"
+        }
+      }
+    },
+    "MeEncuestaTemaJson": {
+      "type": "object",
+      "properties": {
+        "enteCodigo": {
+          "type": "string"
+        },
+        "enteDetalles": {
+          "type": "string"
+        },
+        "enteEstado": {
+          "type": "string"
+        },
+        "enteTema": {
           "type": "string"
         }
       }
