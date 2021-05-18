@@ -445,12 +445,12 @@
       }
     },
     "/api/business/miniencuesta/v1/respuesta/{id}": {
-      "get": {
+      "delete": {
         "tags": [
           "encuesta-persona-respuesta-controller"
         ],
         "summary": "eliminar",
-        "operationId": "eliminarUsingGET",
+        "operationId": "eliminarUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -471,7 +471,7 @@
           "200": {
             "description": "ok",
             "schema": {
-              "type": "boolean"
+              "type": "string"
             }
           },
           "204": {
